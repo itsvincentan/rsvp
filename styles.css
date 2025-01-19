@@ -1,0 +1,1079 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+h2 {
+    font-family: "Poppins", serif;
+    font-weight: 900;
+    letter-spacing: 10px;
+
+}
+
+h3 {
+    font-family: "DM Sans", serif;
+    font-weight: 900;
+    letter-spacing: 7px;
+}
+
+p {
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;      
+}
+
+.chinese {
+    font-family:'Feibo Zheng Dots';
+    font-weight:'400';
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f7f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* RSVP 部分的样式 */
+#rsvp-main {
+    background-color: #72cbff;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.rsvp-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: none;
+    margin-bottom: 20px;
+}
+
+.rsvp-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.rsvp-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.rsvp-btn {
+    padding: 12px 40px;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+.rsvp-btn:hover {
+    background: #f5f5f5;
+}
+
+.rsvp-btn.selected {
+    background: #1da1f2;
+    color: white;
+    border-color: #1da1f2;
+}
+
+/* 表单样式 */
+.message-form, .rsvp-form {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    border: 1px solid #eee;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.form-title {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #1da1f2;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+button {
+    background-color: #E27017;
+    color: white;
+    padding: 24px 15px;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    width: 180px;
+}
+
+button:hover {
+    background-color: #1a91da;
+}
+
+.secondary-btn {
+    background-color: white;
+    color: #1da1f2;
+    border: 2px solid #1da1f2;
+}
+
+.secondary-btn:hover {
+    background-color: #f8f9fa;
+}
+
+/* 留言展示区域样式 */
+.messages-wrapper {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    height: 220px;
+    overflow: hidden;
+}
+
+.messages-wrapper::before,
+.messages-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.messages-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #f7f9f9 0%, transparent 100%);
+}
+
+.messages-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #f7f9f9 0%, transparent 100%);
+}
+
+.messages-scroll {
+    display: flex;
+    animation: scrollHorizontal 8s linear infinite;
+    padding: 20px 0;
+    gap: 20px;
+}
+
+.message-card {
+    flex: 0 0 auto;
+    width: 300px;
+    padding: 16px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.2s;
+}
+
+.message-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #E27017;
+    background: linear-gradient(135deg, #E27017, #D35C0D);;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.message-name {
+    font-weight: bold;
+    color: #000;
+    font-size: 16px;
+}
+
+.message-relation {
+    background-color: #e8f5fd;
+    color: #1da1f2;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.message-content {
+    color: #333;
+    font-size: 15px;
+    margin: 12px 0;
+    line-height: 1.5;
+}
+
+.message-time {
+    font-size: 13px;
+    color: #536471;
+}
+
+@keyframes scrollHorizontal {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* 添加到 style.css 文件末尾 */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    z-index: 1000;
+    animation: fadeInOut 3s ease-in-out;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -20px); }
+    15% { opacity: 1; transform: translate(-50%, 0); }
+    85% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+#hero {
+    background: #E27017;
+    background: linear-gradient(135deg, #E27017, #D35C0D);;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    
+  }
+
+  #hero-tagline {
+    margin-top: 20px;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+#hero-image {
+    margin-bottom: -20px;
+    position: relative;
+  animation: hero-image 1.5s ease-in-out 0s 1 normal forwards;
+}
+
+  @keyframes hero-image {
+	0% {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+#countdown-section {
+    display: flex;
+    justify-content: center;
+}
+
+#countdown-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: none;
+    border-radius: 30px;
+    height: 500px;
+    width: 930px;
+    
+}
+
+
+  /* 添加到 style.css */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #1da1f2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 更新骨架屏样式 */
+.message-skeleton {
+    animation: skeleton-loading 1.5s ease-in-out infinite;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton-card {
+    flex: 0 0 auto;
+    width: 300px;
+    padding: 16px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-right: 20px;
+}
+
+.skeleton-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.skeleton-info {
+    flex: 1;
+}
+
+.skeleton-name {
+    height: 20px;
+    width: 120px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.skeleton-relation {
+    height: 16px;
+    width: 80px;
+    border-radius: 12px;
+}
+
+.skeleton-content {
+    height: 60px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.skeleton-time {
+    height: 14px;
+    width: 100px;
+    border-radius: 4px;
+}
+
+/* 添加渐变效果 */
+.skeleton-content {
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-content::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+    );
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+.groom-bride-section {
+    display: flex;
+    justify-content: center;
+    height: 800px;
+    
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.grey-box {
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    width: 930px;
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    position: relative;
+}
+
+#groom-bride {
+    height: 800px;
+}
+
+#groom-name {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+}
+
+#bride-name {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+}
+
+#bride-name-mobile, #groom-name-mobile {
+    display: none;
+}
+
+.guest-status {
+    display: flex;
+    justify-content: center;
+}
+
+#invited-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    color: #72cbff;
+    width: 300px;
+    height: 300px;
+    margin: 50px 10px 50px 0px;
+}
+
+#pending-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    color: #000000;
+    width: 300px;
+    height: 300px;
+    margin: 50px 0px 50px 0px;
+}
+
+#confirmed-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    color: #E27017;
+    width: 300px;
+    height: 300px;
+    margin: 50px 0px 50px 10px;
+}
+
+#invited-box:hover,#pending-box:hover,#confirmed-box:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.road-map-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.road-map-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#map-background {
+    position: relative;
+    
+}
+
+#map-destination {
+    position: absolute;
+    left: 220px;
+    bottom: 190px;
+    animation: MoveUpDown 1.2s linear infinite;
+}
+
+@keyframes MoveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+#road-map-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#ceremony-section {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+#ceremony-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 500px;
+    width: 930px;
+    background-color: #f2f2f2;
+    border-radius: 30px;
+    margin-bottom: 50px;
+    padding: 20px;
+}
+
+#ceremony-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    margin-bottom: 80px;
+}
+
+
+#ceremony-text > p,h3{
+    margin-bottom: 20px;
+}
+
+
+.scroll-container {
+    width: 100%;
+    height: 90px;
+    background-color: #7dc7ee;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.scroll-text {
+    position: absolute;
+    white-space: nowrap;
+    color:#fef381;
+    font-size: 40px;
+    font-family: "Poppins", serif;
+    font-weight: 800;
+    letter-spacing: 5px;
+    animation: scroll 7s linear infinite;
+}
+
+/* 添加空格分隔两段文字 */
+.scroll-text span {
+    margin-right: 50px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+/* 让动画更流畅的优化 */
+.scroll-text {
+    will-change: transform;
+    -webkit-font-smoothing: antialiased;
+}
+
+#audio-player-main {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: 50px;
+}
+
+#audio-player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    border-radius: 30px;
+    width: 930px;
+    height: 300px;
+    background-color: #f2f2f2;
+}
+
+#qna-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq-container {
+    max-width: 930px;
+    border-radius: 30px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.faq-item {
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.faq-question {
+    background-color: #f2f2f2;
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #f0f1f2;
+}
+
+.faq-question h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.faq-arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.faq-arrow::before {
+    content: '›';
+    display: inline-block;
+    font-size: 24px;
+    transform: rotate(90deg);
+}
+
+.active .faq-arrow::before {
+    transform: rotate(-90deg);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: white;
+}
+
+.faq-answer-content {
+    padding: 20px;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* 添加一些视觉效果 */
+.faq-question.active {
+    background-color: #f0f1f2;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+
+#bottom-footer {
+    position: relative;
+    width: 100vw;
+    height: 150px;
+    background: #E27017;
+    background: linear-gradient(135deg, #E27017, #D35C0D);
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+#bottom-footer p{
+    margin: 0;
+}
+
+
+/* 移动端响应式 */
+/* 移动端响应式 */
+@media only screen and (max-width: 768px) {
+    /* Hero 区域 */
+    #hero {
+        height: auto;
+        min-height: 100vh;
+        padding: 20px 0;
+    }
+
+    #hero-tagline img {
+        width: 250px;
+        height: auto;
+        margin-top: 10px;
+    }
+
+    #hero-tagline h3 {
+        font-size: 13px;
+        margin-bottom: 15px;
+    }
+
+    #hero-image img {
+        height: 400px !important;
+        width: auto;
+        margin-bottom: -20px;
+    }
+
+    /* 滚动文字区域 */
+    .scroll-container {
+        height: 70px;
+    }
+
+    .scroll-text {
+        font-size: 24px;
+    }
+
+    .scroll-text img {
+        height: 23px !important;
+        margin-top: 8px !important;
+    }
+
+    .scroll-text span {
+        margin-right: 20px;
+    }
+
+    /* 状态卡片区域 */
+    .guest-status {
+        flex-direction: row;
+        align-items: center;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    #invited-box, #pending-box, #confirmed-box {
+        width: 150px;
+        max-width: 300px;
+        height: 120px;
+        margin: 5px;
+        padding: 10px;
+    }
+
+    #invited-box img, #pending-box img, #confirmed-box img {
+        height: 30px !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+
+    #invited-box p, #pending-box p, #confirmed-box p {
+        font-size: 15px !important;
+        margin: 0px;
+    }
+
+    #invited-box h3, #pending-box h3, #confirmed-box h3 {
+        font-size: 7px !important;
+        letter-spacing: 3px;
+        margin: 0px;
+    }
+
+    /* 倒计时区域 */
+    #countdown-section {
+        padding: 20px;
+    }
+
+    #countdown-box {
+        width: 100%;
+        height: 400px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    #countdown {
+        font-size: 23px !important;
+    }
+
+    /* 地图区域 */
+    .road-map-box #map-background img {
+        width: 100% !important;
+        height: auto;
+    }
+
+    #map-destination {
+        width: 100px !important;
+        left: 90px;
+        transform: translateX(-50%);
+        bottom: 80px;
+    }
+
+    #road-map-name {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+
+    }
+
+    /*
+    #map-destination >img {
+        width: 100px !important;
+    }
+        */
+
+    /* 新郎新娘区域 */
+    .groom-bride-section {
+        height: auto;
+        margin: 40px 0;
+        padding: 0 20px;
+    }
+
+    .grey-box {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        flex-direction: column;
+    }
+
+    #groom-bride {
+        height: auto !important;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    #groom-name, #bride-name {
+        display: none;
+    }
+
+    #bride-name-mobile, #groom-name-mobile {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 10px 10px;
+    }
+
+    #bride-name-mobile p, #groom-name-mobile p {
+        margin: 10px;
+    }
+
+    #groom-name-mobile img, #bride-name-mobile img {
+        width: 50px !important;
+        height: auto;
+    }
+
+    /* 仪式部分 */
+    #ceremony-section {
+        margin: 20px;
+    }
+
+    #ceremony-box {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    #ceremony-box img {
+        height: 250px !important;
+        width: auto;
+    }
+
+    #ceremony-text {
+        margin: 20px 0;
+        text-align: center;
+    }
+
+    /* RSVP 区域 */
+    .rsvp-buttons {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .rsvp-btn {
+        width: 80%;
+        margin: 5px 0;
+    }
+
+    .rsvp-btn img {
+        height: 40px !important;
+    }
+
+    /* FAQ 区域 */
+    #qna-logo img {
+        margin-top: 50px;
+        width: 120px !important;
+    }
+
+    .faq-container {
+        padding: 15px;
+    }
+
+    /* 留言区域 */
+    .messages-wrapper {
+        height: 180px;
+    }
+
+    /* Footer */
+    #bottom-footer {
+        height: auto;
+        padding: 20px;
+    }
+
+    #bottom-footer p {
+        font-size: 12px;
+        padding: 0 20px;
+        text-align: center;
+    }
+}
+
+/* 小屏幕手机额外调整 */
+@media only screen and (max-width: 360px) {
+    #hero-image img {
+        max-height: 250px;
+    }
+
+    .scroll-text {
+        font-size: 20px;
+    }
+
+    .rsvp-btn {
+        width: 90%;
+    }
+}
