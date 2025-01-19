@@ -957,6 +957,7 @@ button:hover {
 
     /* 新郎新娘区域 */
     .groom-bride-section {
+        
         height: auto;
         margin: 40px 0;
         padding: 0 20px;
@@ -972,7 +973,7 @@ button:hover {
     #groom-bride {
         height: auto !important;
         width: 100%;
-        max-width: 300px;
+        max-width: 400px;
     }
 
     #groom-name, #bride-name {
