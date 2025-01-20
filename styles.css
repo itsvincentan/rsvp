@@ -319,7 +319,7 @@ button:hover {
 @keyframes fadeInOut {
     0% { opacity: 0; transform: translate(-50%, -20px); }
     15% { opacity: 1; transform: translate(-50%, 0); }
-    85% { opacity: 1; transform: translate(-50%, 0); }
+    50% { opacity: 1; transform: translate(-50%, 0); }
     100% { opacity: 0; transform: translate(-50%, -20px); }
 }
 
@@ -701,7 +701,7 @@ button:hover {
 
 /* 添加空格分隔两段文字 */
 .scroll-text span {
-    margin-right: 50px;
+    margin-right: 120px;
 }
 
 @keyframes scroll {
@@ -993,10 +993,10 @@ button:hover {
         margin: 10px;
     }
 
-    #groom-name-mobile img, #bride-name-mobile img {
+    /*#groom-name-mobile img, #bride-name-mobile img {
         width: 50px !important;
         height: auto;
-    }
+    } */
 
     /* 仪式部分 */
     #ceremony-section {
@@ -1051,6 +1051,16 @@ button:hover {
     .messages-wrapper {
         height: 180px;
     }
+    
+    .messages-wrapper::before {
+        left: 0;
+        background: none;
+    }
+    
+    .messages-wrapper::after {
+        right: 0;
+        background: none;
+    }
 
     /* Footer */
     #bottom-footer {
@@ -1062,6 +1072,8 @@ button:hover {
         font-size: 12px;
         padding: 0 20px;
         text-align: center;
+
+        
     }
 }
 
