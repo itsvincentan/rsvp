@@ -1,0 +1,90 @@
+
+#menu-text {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+#menu-text h3 {
+    margin-bottom: 40px;
+}
+
+#menu-text h4 {
+    letter-spacing: 5px;
+}
+
+#menu-text li{
+    margin-bottom: 15px;
+    
+}
+
+#menu-section  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#menu-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#food-bg {
+    position: relative;
+}
+
+#hochiak {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    animation: MoveUpDown 1.2s linear infinite;
+}
+
+#behpaima {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    animation: MoveUpDown 1.2s linear infinite;
+}
+
+
+@media only screen and (max-width: 768px) {
+    #menu-section {
+        margin: 20px;
+    }
+
+    #menu-box {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+
+    #menu-box img {
+        height: 500px !important;
+        width: auto !important;
+    }
+
+    #hochiak {
+        left: 40px;
+        transform: translateX(-50%);
+    }
+
+    #behpaima {
+        left: 30px;
+        transform: translateX(-50%);
+    }
+
+    #hochiak img, #behpaima img{
+        width: auto !important;
+        height: 100px !important;
+    }
+
+    #menu-text {
+        margin: 20px 0;
+        text-align: center;
+    }
+}
