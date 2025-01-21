@@ -192,7 +192,9 @@ button:hover {
     margin-right: calc(-50vw + 50%);
     height: 220px;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
 }
+
 
 .messages-wrapper::before,
 .messages-wrapper::after {
@@ -217,9 +219,10 @@ button:hover {
 
 .messages-scroll {
     display: flex;
-    animation: scrollHorizontal 8s linear infinite;
+    animation: scrollHorizontal 15s linear infinite;
     padding: 20px 0;
     gap: 20px;
+    will-change: transform;
 }
 
 .message-card {
@@ -229,7 +232,7 @@ button:hover {
     background: white;
     border-radius: 16px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: all 0.2s;
+    transition: transform 0.2s;
 }
 
 .message-card:hover {
@@ -1053,9 +1056,19 @@ button:hover {
         height: 40px !important;
     }
 
-    .messages-scroll {
-        animation: scrollHorizontal 15s linear infinite;
+    .messages-wrapper {
+        height: 180px;
     }
+
+    .message-card {
+        width: 260px; /* 稍微减小卡片宽度以适应移动端 */
+    }
+
+    .messages-scroll {
+        /* 增加动画时间，数字越大滚动越慢 */
+        animation: scrollHorizontal 20s linear infinite;  /* 原来是 15s，改为 45s 让它慢一点 */
+    }
+
     @keyframes scrollHorizontal {
         0% {
             transform: translateX(0);
@@ -1063,6 +1076,21 @@ button:hover {
         100% {
             transform: translateX(-200rem);
         }
+    }
+    
+    /* 移动端滚动动画 */
+    @keyframes scrollHorizontalMobile {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    
+    /* 当动画暂停时保持平滑效果 */
+    .messages-scroll:hover {
+        animation-play-state: paused;
     }
 
     /* FAQ 区域 */

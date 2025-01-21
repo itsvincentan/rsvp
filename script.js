@@ -104,23 +104,34 @@ function getInitial(name) {
 }
 
 // 渲染留言函数
+// 修改渲染留言函数
 function renderMessages() {
     const messagesContainer = document.getElementById('messages');
     if (!messagesContainer) {
-        console.error('Messages container not found!'); // 调试日志
+        console.error('Messages container not found!');
         return;
     }
     
-    console.log('Rendering messages:', messages); // 调试日志
+    console.log('Rendering messages:', messages);
     messagesContainer.innerHTML = '';
     
     if (!messages || messages.length === 0) {
-        console.log('No messages to display'); // 调试日志
+        console.log('No messages to display');
         return;
     }
     
-    // 复制messages数组以实现无缝滚动
-    const allMessages = [...messages, ...messages, ...messages];
+    // 增加复制次数，确保有足够的内容进行滚动
+    // 在移动端需要更多的复制来保持连续滚动
+    const isMobile = window.innerWidth <= 768;
+    const repeatTimes = isMobile ? 8 : 3; // 移动端使用更多重复
+    const allMessages = [];
+    
+    // 创建足够多的消息副本
+    for (let i = 0; i < repeatTimes; i++) {
+        allMessages.push(...messages);
+    }
+    
+    const fragment = document.createDocumentFragment();
     
     allMessages.forEach(msg => {
         const messageElement = document.createElement('div');
@@ -136,9 +147,24 @@ function renderMessages() {
             <div class="message-content">${msg.message}</div>
             <div class="message-time">${msg.time}</div>
         `;
-        messagesContainer.appendChild(messageElement);
+        fragment.appendChild(messageElement);
     });
+    
+    messagesContainer.appendChild(fragment);
+
+    // 动态调整动画持续时间
+    const scrollContainer = messagesContainer.querySelector('.messages-scroll');
+    if (scrollContainer) {
+        const totalWidth = scrollContainer.scrollWidth;
+        const duration = isMobile ? totalWidth / 50 : totalWidth / 100; // 移动端使用更慢的速度
+        scrollContainer.style.animationDuration = `${duration}s`;
+    }
 }
+
+// 为窗口大小变化添加适当的处理
+window.addEventListener('resize', () => {
+    requestAnimationFrame(renderMessages);
+});
 
 // 显示提示信息
 function showNotification(message, duration = 3000) {
@@ -241,42 +267,7 @@ function showMessageForm() {
 
 
 
-// 修改提交函数，添加加载动画
-// 修改留言提交的处理函数
-document.getElementById('guestbook-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    showLoading();
-    
-    const messageData = {
-        type: 'messages',
-        name: document.getElementById('name').value,
-        relation: document.getElementById('relation').value,
-        message: document.getElementById('message').value,
-        time: formatDate(new Date())
-    };
 
-    try {
-        const success = await submitToGoogleSheets(messageData);
-        if (success) {
-            await fetchMessages();
-            this.reset();
-            document.getElementById('message-form').style.display = 'none';
-            // 恢复 RSVP 部分的显示
-            document.querySelector('.rsvp-section').style.display = 'block';
-            // 重置 RSVP 按钮状态
-            document.querySelectorAll('.rsvp-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            showNotification('Message sent successfully!');
-        } else {
-            throw new Error('提交失败');
-        }
-    } catch (error) {
-        showNotification('Failed to submit message, please try again');
-    } finally {
-        hideLoading();
-    }
-});
 
 
 // 定期刷新消息（每5分钟）
@@ -317,42 +308,55 @@ function formatDate(date) {
     });
 }
 
-// 在提交留言时使用这个格式
-// 修改提交函数，添加加载动画
-document.getElementById('guestbook-form').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    showLoading();
-    
-    // 在这里定义 messageData
-    const messageData = {
-        type: 'messages',
-        name: document.getElementById('name').value,
-        relation: document.getElementById('relation').value,
-        message: document.getElementById('message').value,
-        time: formatDate(new Date())
-    };
 
-    try {
-        const success = await submitToGoogleSheets(messageData);
-        if (success) {
-            await fetchMessages();
-            this.reset();
-            document.getElementById('message-form').style.display = 'none';
-            showNotification('Message sent successfully!');
-        } else {
-            throw new Error('提交失败');
-        }
-    } catch (error) {
-        showNotification('Failed to submit message, please try again');
-    } finally {
-        hideLoading();
-    }
-});
 
 // 将 DOMContentLoaded 事件监听器移到文件末尾
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('Page loaded, fetching messages...');
     await fetchMessages();
+    
+    // 添加新的表单提交处理代码
+    const guestbookForm = document.getElementById('guestbook-form');
+    const oldListener = guestbookForm?.onsubmit;
+    if (oldListener) {
+        guestbookForm.removeEventListener('submit', oldListener);
+    }
+
+    // 添加新的监听器
+    guestbookForm?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        showLoading();
+        
+        const messageData = {
+            type: 'messages',
+            name: document.getElementById('name').value,
+            relation: document.getElementById('relation').value,
+            message: document.getElementById('message').value,
+            time: formatDate(new Date())
+        };
+
+        try {
+            const success = await submitToGoogleSheets(messageData);
+            if (success) {
+                await fetchMessages();
+                this.reset();
+                document.getElementById('message-form').style.display = 'none';
+                // 恢复 RSVP 部分的显示
+                document.querySelector('.rsvp-section').style.display = 'block';
+                // 重置 RSVP 按钮状态
+                document.querySelectorAll('.rsvp-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                showNotification('Message sent successfully!');
+            } else {
+                throw new Error('提交失败');
+            }
+        } catch (error) {
+            showNotification('Failed to submit message, please try again');
+        } finally {
+            hideLoading();
+        }
+    });
 });
 
 function showLoading() {
