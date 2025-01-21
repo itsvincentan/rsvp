@@ -1032,6 +1032,10 @@ button:hover {
         text-align: center;
     }
 
+    #audio-player {
+        margin: 20px;
+    }
+
     /* RSVP 区域 */
     .rsvp-buttons {
         flex-direction: column;
