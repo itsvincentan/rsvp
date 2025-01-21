@@ -841,7 +841,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: end;
-    margin-bottom: -20px;
+    bottom:-20px;
 }
 
 #bottom-footer p{
@@ -1060,9 +1060,9 @@ button:hover {
         height: 180px;
     }
 
-    .message-card {
-        width: 260px; /* 稍微减小卡片宽度以适应移动端 */
-    }
+    /*.message-card {
+       /* width: 260px;  稍微减小卡片宽度以适应移动端
+    }*/
 
     .messages-scroll {
         /* 增加动画时间，数字越大滚动越慢 */
@@ -1120,7 +1120,6 @@ button:hover {
 
     /* Footer */
     #bottom-footer {
-        margin-bottom: -25px;
         height: 90px;
         padding: 20px;
     }
