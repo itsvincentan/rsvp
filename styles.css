@@ -376,14 +376,19 @@ button:hover {
     flex-direction: column;
     background-color: none;
     border-radius: 30px;
-    height: 500px;
+    height: 400px;
     width: 930px;
+    margin-bottom: 50px;
 }
 
 #timer {
+    margin-top: 10px;
+   /* border: 2px solid black; */
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 
@@ -928,6 +933,7 @@ button:hover {
         height: 250px;
         padding: 20px;
         text-align: center;
+        margin-bottom: 30px;
     }
 
     #countdown {
@@ -1013,7 +1019,7 @@ button:hover {
         height: auto;
         flex-direction: column;
         align-items: center;
-        padding: 20px;
+        padding: 50px 20px 20px 20px;
     }
 
     #ceremony-box img {
@@ -1040,6 +1046,18 @@ button:hover {
 
     .rsvp-btn img {
         height: 40px !important;
+    }
+
+    .messages-scroll {
+        animation: scrollHorizontal 15s linear infinite;
+    }
+    @keyframes scrollHorizontal {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-200rem);
+        }
     }
 
     /* FAQ 区域 */
