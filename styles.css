@@ -1056,16 +1056,27 @@ button:hover {
         height: 40px !important;
     }
 
-    .messages-wrapper {
-        height: 180px;
+    .message-header {
+        gap: 10px;        /* 步骤4：调整间距 */
     }
 
-    /*.message-card {
-       /* width: 260px;  稍微减小卡片宽度以适应移动端
-    }*/
+    .message-content {
+        margin: 10px 0;   /* 步骤4：调整间距 */
+    }
+
+    .messages-wrapper {
+        height: 220px;
+    }
+
+    .message-card {
+       padding: 14px;    /* 步骤2：减少内边距 */
+       width: 280px;     /* 步骤3：缩小宽度 */
+       margin-bottom: 0; /* 步骤4：移除底部边距 */
+    }
 
     .messages-scroll {
         /* 增加动画时间，数字越大滚动越慢 */
+        padding: 10px 0;  /* 步骤2：减少内边距 */
         animation: scrollHorizontal 20s linear infinite;  /* 原来是 15s，改为 45s 让它慢一点 */
     }
 
