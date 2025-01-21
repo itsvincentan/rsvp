@@ -180,13 +180,20 @@ function showNotification(message, duration = 3000) {
 }
 
 // 处理RSVP选择
-function handleRSVP(choice) {
+function handleRSVP(choice, event) {  // 添加 event 参数
     // 重置所有状态
     rsvpInfo = null; // 清空之前的信息
+    
+    // 获取实际点击的按钮元素
+    const clickedButton = event.currentTarget;
+    
+    // 移除所有按钮的 selected 类
     document.querySelectorAll('.rsvp-btn').forEach(btn => {
         btn.classList.remove('selected');
     });
-    event.target.classList.add('selected');
+    
+    // 给点击的按钮添加 selected 类
+    clickedButton.classList.add('selected');
 
     if (choice === 'yes') {
         document.getElementById('rsvp-form').style.display = 'block';
