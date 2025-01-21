@@ -838,6 +838,7 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: end;
+    margin-bottom: -20px;
 }
 
 #bottom-footer p{
@@ -1091,7 +1092,8 @@ button:hover {
 
     /* Footer */
     #bottom-footer {
-        height: auto;
+        margin-bottom: -25px;
+        height: 90px;
         padding: 20px;
     }
 
