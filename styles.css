@@ -1064,10 +1064,6 @@ button:hover {
         margin: 10px 0;   /* 步骤4：调整间距 */
     }
 
-    .messages-wrapper {
-        height: 220px;
-    }
-
     .message-card {
        padding: 14px;    /* 步骤2：减少内边距 */
        width: 280px;     /* 步骤3：缩小宽度 */
@@ -1116,7 +1112,7 @@ button:hover {
 
     /* 留言区域 */
     .messages-wrapper {
-        height: 180px;
+        height: 250px;
     }
     
     .messages-wrapper::before {
