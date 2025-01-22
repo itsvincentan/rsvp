@@ -190,7 +190,7 @@ button:hover {
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
-    height: 220px;
+    height: 280px;
     overflow: hidden;
     -webkit-overflow-scrolling: touch;
 }
@@ -1112,7 +1112,7 @@ button:hover {
 
     /* 留言区域 */
     .messages-wrapper {
-        height: 250px;
+        height: 280px;
     }
     
     .messages-wrapper::before {
