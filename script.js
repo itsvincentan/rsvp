@@ -5,7 +5,7 @@ let rsvpInfo = null;
 let messages = [];
 
 // 全局 URL 定义
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSdQEmZvHv5_ouQudugTyeDam_wlPQwxy_n0j76dEg6-9_uZlToAiWm-AZDrX1sQOtpA/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxo-B6qHPhQjH4BAGBIgfm4zTVnbKp9T_xMrzSff0lVqMyKrhYhkshLHVrBG-0SSwk0eA/exec';
 
 // 添加显示骨架屏的函数
 // 修改显示骨架屏的函数
@@ -85,15 +85,18 @@ async function submitToGoogleSheets(data) {
     try {
         const response = await fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors',
+            mode: 'no-cors',  // 这里很重要
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data)
         });
+        
+        // 添加日志来帮助调试
+        console.log('Submitting data:', data);
         return true;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error submitting:', error);
         return false;
     }
 }
@@ -105,6 +108,7 @@ function getInitial(name) {
 
 // 渲染留言函数
 // 修改渲染留言函数
+// 渲染留言函数
 function renderMessages() {
     const messagesContainer = document.getElementById('messages');
     if (!messagesContainer) {
@@ -121,12 +125,10 @@ function renderMessages() {
     }
     
     // 增加复制次数，确保有足够的内容进行滚动
-    // 在移动端需要更多的复制来保持连续滚动
     const isMobile = window.innerWidth <= 768;
-    const repeatTimes = isMobile ? 8 : 3; // 移动端使用更多重复
+    const repeatTimes = isMobile ? 8 : 3;
     const allMessages = [];
     
-    // 创建足够多的消息副本
     for (let i = 0; i < repeatTimes; i++) {
         allMessages.push(...messages);
     }
@@ -134,18 +136,24 @@ function renderMessages() {
     const fragment = document.createDocumentFragment();
     
     allMessages.forEach(msg => {
+        // 添加数据验证
+        const name = msg.name || 'Anonymous';
+        const relation = msg.relation || '';
+        const message = msg.message || '';
+        const time = msg.time || '';
+
         const messageElement = document.createElement('div');
         messageElement.className = 'message-card';
         messageElement.innerHTML = `
             <div class="message-header">
-                <div class="avatar">${getInitial(msg.name)}</div>
+                <div class="avatar">${getInitial(name)}</div>
                 <div class="user-info">
-                    <div class="message-name">${msg.name}</div>
-                    <div class="message-relation">${msg.relation}</div>
+                    <div class="message-name">${name}</div>
+                    <div class="message-relation">${relation}</div>
                 </div>
             </div>
-            <div class="message-content">${msg.message}</div>
-            <div class="message-time">${msg.time}</div>
+            <div class="message-content">${message}</div>
+            <div class="message-time">${time}</div>
         `;
         fragment.appendChild(messageElement);
     });
@@ -156,7 +164,7 @@ function renderMessages() {
     const scrollContainer = messagesContainer.querySelector('.messages-scroll');
     if (scrollContainer) {
         const totalWidth = scrollContainer.scrollWidth;
-        const duration = isMobile ? totalWidth / 50 : totalWidth / 100; // 移动端使用更慢的速度
+        const duration = isMobile ? totalWidth / 50 : totalWidth / 100;
         scrollContainer.style.animationDuration = `${duration}s`;
     }
 }
@@ -213,7 +221,6 @@ function handleRSVP(choice, event) {  // 添加 event 参数
 
 
 // 修改出席表单提交处理
-// 修改出席表单提交处理
 document.getElementById('attendance-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     showLoading();
@@ -221,6 +228,8 @@ document.getElementById('attendance-form').addEventListener('submit', async func
     const attendanceData = {
         type: 'attendance',
         name: document.getElementById('rsvp-name').value,
+        email: document.getElementById('rsvp-email').value,
+        phone: document.getElementById('rsvp-phone').value,
         relation: document.getElementById('rsvp-relation').value,
         count: document.getElementById('rsvp-count').value,
         time: formatDate(new Date())
@@ -285,8 +294,6 @@ window.addEventListener('resize', renderMessages);
 
 // 添加这个通用提交函数
 async function submitToGoogleSheets(data) {
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSdQEmZvHv5_ouQudugTyeDam_wlPQwxy_n0j76dEg6-9_uZlToAiWm-AZDrX1sQOtpA/exec'; // 替换为你的 Apps Script 网址
-    
     try {
         const response = await fetch(SCRIPT_URL, {
             method: 'POST',
@@ -330,6 +337,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // 添加新的监听器
+    // 更新留言提交处理
     guestbookForm?.addEventListener('submit', async function(e) {
         e.preventDefault();
         showLoading();
@@ -348,9 +356,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await fetchMessages();
                 this.reset();
                 document.getElementById('message-form').style.display = 'none';
-                // 恢复 RSVP 部分的显示
                 document.querySelector('.rsvp-section').style.display = 'block';
-                // 重置 RSVP 按钮状态
                 document.querySelectorAll('.rsvp-btn').forEach(btn => {
                     btn.classList.remove('selected');
                 });

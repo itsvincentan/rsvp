@@ -157,7 +157,6 @@
                 <h3>CEREMONY ITINERARY</h3>
                 <p>6pm Check in</p>
                 <p>7pm Dinner</p>
-                <p>8pm Not Sure Yet</p>
             </div>
         </div>
     </section>
@@ -241,13 +240,20 @@
         </div>
     </div>
 
-    <!-- RSVP 表单 (默认隐藏) -->
     <div id="rsvp-form" class="rsvp-form" style="display: none;">
         <h3 class="form-title">Please fill the form</h3>
         <form id="attendance-form">
             <div class="form-group">
                 <label for="rsvp-name">姓名 Name</label>
                 <input type="text" id="rsvp-name" required>
+            </div>
+            <div class="form-group">
+                <label for="rsvp-email">电子邮件 Email</label>
+                <input type="email" id="rsvp-email" required>
+            </div>
+            <div class="form-group">
+                <label for="rsvp-phone">联系电话 Phone</label>
+                <input type="tel" id="rsvp-phone" pattern="[0-9\+\-\s]+" required>
             </div>
             <div class="form-group">
                 <label for="rsvp-relation">与新人关系 Relationship</label>
@@ -262,7 +268,6 @@
                         <option value="女方亲戚">亲戚 Relative</option>
                         <option value="女方朋友">朋友 Friends</option>
                         <option value="女方家人">家人 Family</option>
-                        
                     </optgroup>
                     <option value="其他">其他 Other</option>
                 </select>
@@ -399,6 +404,9 @@
                         <p><b>4679818209</p>
                         <p>TER EE PEI</p>
                         <p>PUBLIC BANK</b></p>
+                        <br>
+                        <img src="images/duitnow.png" width="300px">
+                        <p>Please inform us once you make any transfer to us, please e-mail <b>hello@vincentjavene.com</b> or ws 0167729304 Vincent.</p>
                 </div>
             </div>
         </div>
